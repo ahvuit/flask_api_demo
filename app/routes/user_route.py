@@ -15,7 +15,8 @@ def get_user_route(user_id):
             return BaseResponse(message="Success", data=[user.to_dict()], code=200).to_dict(), 200
         else:
             return BaseResponse(message="User not found", data=None, code=404).to_dict(), 404
-    except Exception:
+    except Exception as e:
+        print(e)
         return BaseResponse(message="Server Error", data=None, code=500).to_dict(), 500
 
 
@@ -25,6 +26,7 @@ def create_user_route():
         data = request.get_json()
         new_user = create_user(data['username'], data['email'])
         return BaseResponse(message="Success", data=[new_user.to_dict()], code=200).to_dict(), 200
-    except Exception:
+    except Exception as e:
+        print(e)
         return BaseResponse(message="Server Error", data=None, code=500).to_dict(), 500
 
